@@ -26,6 +26,8 @@ long int daySeconds();
 void openDoor();
 //set the motor controller direction pins to close the door.
 void closeDoor();
+//resets any voltages on direction pins for motor controller.
+void resetDirectionPins();
 
 int main(void) {
     // Initialize WiringPi and pin modes + outputs
@@ -34,12 +36,13 @@ int main(void) {
     pinMode(DIR1, OUTPUT);
     pinMode(DIR2, OUTPUT);
     analogWrite(SPEEDPIN,255);
+    resetDirectionPins();//Stupid bug, you have to initialize direction pin values to low.
 
-    closeDoor();
+    
     for(;;){
-
+        closeDoor();
     }
-
+    resetDirectionPins();
     
 
 
@@ -98,13 +101,19 @@ long int daySeconds(){
 }
 
 void openDoor(){
+    digitalWrite(DIR1, LOW);
+    digitalWrite(DIR2, HIGH);
+}
+
+void closeDoor(){
     digitalWrite(DIR1, HIGH);
     digitalWrite(DIR2, LOW);
 }
 
-void closeDoor(){
+void resetDirectionPins(){
     digitalWrite(DIR1, LOW);
-    digitalWrite(DIR2, HIGH);
+    digitalWrite(DIR2, LOW);
+
 }
 
 

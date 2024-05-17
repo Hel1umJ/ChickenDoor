@@ -19,6 +19,9 @@ https://learn.sparkfun.com/tutorials/raspberry-gpio/c-wiringpi-setup
 -wiringPi pinout: https://pinout.xyz/pinout/wiringpi
 
 
+Alternative library that isnt depreciated: pigpio
+https://abyz.me.uk/rpi/pigpio/download.html
+
 
 
 
