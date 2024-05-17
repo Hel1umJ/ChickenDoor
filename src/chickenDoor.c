@@ -94,12 +94,12 @@ long int daySeconds(){
 
 void open(){
     digitalWrite(DIR1, HIGH);
-    digitalWRite(DIR2, LOW);
+    digitalWrite(DIR2, LOW);
 }
 
 void close(){
     digitalWrite(DIR1, LOW);
-    digitalWRite(DIR2, HIGH);
+    digitalWrite(DIR2, HIGH);
 }
 
 
