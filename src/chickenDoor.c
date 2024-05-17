@@ -20,12 +20,12 @@ float closingTime = 20; //Decima number from [0,24], decimal for partial hours
 /*
 *Prototypes
 */
-//Returns the number of seconds elapsed over the current day.
-long int daySeconds();
-//Set the motor controller pins to open the door.
-void open();
-//set the motor controller direction pins to close the door.
-void close();
+// //Returns the number of seconds elapsed over the current day.
+// long int daySeconds();
+// //Set the motor controller pins to open the door.
+// void open();
+// //set the motor controller direction pins to close the door.
+// void close();
 
 int main(void) {
     // // Initialize WiringPi and pin modes + outputs
@@ -106,12 +106,12 @@ long int daySeconds(){
     return secondsToday;
 }
 
-void open(){
+void openDoor(){
     digitalWrite(DIR1, HIGH);
     digitalWrite(DIR2, LOW);
 }
 
-void close(){
+void closeDoor(){
     digitalWrite(DIR1, LOW);
     digitalWrite(DIR2, HIGH);
 }
