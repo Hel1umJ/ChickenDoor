@@ -28,7 +28,7 @@ void open();
 void close();
 
 int main(void) {
-    //Initialize WiringPi and pin modes + outputs
+    // Initialize WiringPi and pin modes + outputs
     wiringPiSetup();  // Initialize wiringPi
     pinMode(SPEEDPIN, OUTPUT);  // Set pin as output
     pinMode(DIR1, OUTPUT);
@@ -55,21 +55,21 @@ int main(void) {
 
     // for(;;){
 
-    //     if(daySeconds() >= openSeconds && daySeconds <= closingSeconds){
+        if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
     //         open();
-    //     }else{
+            ;
+        }else{
     //         close();
-    //     }
-    // }
+            ;
+         }
+    //}
 
 
     return 0;
 
 }
 
-/*
-*Returns the number of seconds that have elapsed in the current day.
-*/
+
 long int daySeconds(){
     time_t timer;
     struct tm y2k = {0}; //Struct holding date for Jan 1, 2000, reference point
