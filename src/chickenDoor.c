@@ -35,7 +35,7 @@ int main(void) {
     pinMode(DIR2, OUTPUT);
     analogWrite(SPEEDPIN,255);
 
-    openDoor();
+    closeDoor();
     for(;;){
 
     }
