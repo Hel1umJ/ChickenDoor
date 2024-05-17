@@ -20,27 +20,48 @@ float closingTime = 20; //Decima number from [0,24], decimal for partial hours
 /*
 *Prototypes
 */
-// //Returns the number of seconds elapsed over the current day.
-// long int daySeconds();
-// //Set the motor controller pins to open the door.
-// void open();
-// //set the motor controller direction pins to close the door.
-// void close();
+//Returns the number of seconds elapsed over the current day.
+long int daySeconds();
+//Set the motor controller pins to open the door.
+void openDoor();
+//set the motor controller direction pins to close the door.
+void closeDoor();
 
 int main(void) {
-    // // Initialize WiringPi and pin modes + outputs
-    // wiringPiSetup();  // Initialize wiringPi
-    // pinMode(SPEEDPIN, OUTPUT);  // Set pin as output
-    // pinMode(DIR1, OUTPUT);
-    // pinMode(DIR2, OUTPUT);
-    // analogWrite(SPEEDPIN,255);
+    // Initialize WiringPi and pin modes + outputs
+    wiringPiSetup();  // Initialize wiringPi
+    pinMode(SPEEDPIN, OUTPUT);  // Set pin as output
+    pinMode(DIR1, OUTPUT);
+    pinMode(DIR2, OUTPUT);
+    analogWrite(SPEEDPIN,255);
 
-    // // open();
-    // // for(;;){
+    openDoor();
+    for(;;){
 
-    // // }
+    }
 
     
+
+
+    // long int openSeconds = openTime*60*60;
+    // long int closingSeconds = closingTime*60*60;
+
+    // // for(;;){
+
+    //     if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
+    // //         open();
+    //         ;
+    //     }else{
+    // //         close();
+    //         ;
+    //      }
+    // //}
+
+    return 0;
+    
+   //Blink
+    // wiringPiSetup();  // Initialize wiringPi
+    // pinMode(DIR1, OUTPUT);  // Set pin as output
 
     // while(1) {
     //     digitalWrite(DIR1, HIGH);  // Turn LED on
@@ -49,37 +70,7 @@ int main(void) {
     //     delay(500);  // Wait 500ms
     // }
 
-
-    // // long int openSeconds = openTime*60*60;
-    // // long int closingSeconds = closingTime*60*60;
-
-    // // // for(;;){
-
-    // //     if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
-    // // //         open();
-    // //         ;
-    // //     }else{
-    // // //         close();
-    // //         ;
-    // //      }
-    // // //}
-
-    //return 0;
-    
-    // Setup stuff:
-    wiringPiSetup();  // Initialize wiringPi
-    pinMode(DIR1, OUTPUT);  // Set pin as output
-
-    while(1) {
-        digitalWrite(DIR1, HIGH);  // Turn LED on
-        delay(500);  // Wait 500ms
-        digitalWrite(DIR1, LOW);  // Turn LED off
-        delay(500);  // Wait 500ms
-    }
-
-    return 0;
-
-    
+    // return 0;
 
 }
 
@@ -148,3 +139,7 @@ void closeDoor(){
 
 //     return 0;
 // }
+
+
+//TODO: I found the fuking bug. setup calls a function called open(), 
+//and I implicitly overrided the open() function.
