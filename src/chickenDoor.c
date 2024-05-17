@@ -29,7 +29,7 @@ void close();
 
 int main(void) {
     // // Initialize WiringPi and pin modes + outputs
-    wiringPiSetup();  // Initialize wiringPi
+    // wiringPiSetup();  // Initialize wiringPi
     // pinMode(SPEEDPIN, OUTPUT);  // Set pin as output
     // pinMode(DIR1, OUTPUT);
     // pinMode(DIR2, OUTPUT);
@@ -64,8 +64,22 @@ int main(void) {
     // //      }
     // // //}
 
+    //return 0;
+    
+    // Setup stuff:
+    wiringPiSetup();  // Initialize wiringPi
+    pinMode(DIR1, OUTPUT);  // Set pin as output
+
+    while(1) {
+        digitalWrite(DIR1, HIGH);  // Turn LED on
+        delay(500);  // Wait 500ms
+        digitalWrite(DIR1, LOW);  // Turn LED off
+        delay(500);  // Wait 500ms
+    }
 
     return 0;
+
+    
 
 }
 
