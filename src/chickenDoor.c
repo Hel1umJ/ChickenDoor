@@ -13,7 +13,7 @@ float closingTime = 20; //Decima number from [0,24], decimal for partial hours
 /*
 *Pinout declarations
 */
-#define SPEEDPIN 1
+#define SPEEDPIN 7
 #define DIR1 0  // GPIO 17 in WiringPi is pin 0; 
 #define DIR2 2
 
