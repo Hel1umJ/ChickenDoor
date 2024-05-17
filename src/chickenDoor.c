@@ -15,7 +15,7 @@ float closingTime = 20; //Decima number from [0,24], decimal for partial hours
 */
 #define SPEEDPIN 1
 #define DIR1 0  // GPIO 17 in WiringPi is pin 0; 
-#define DIR2 1
+#define DIR2 2
 
 /*
 *Prototypes
@@ -35,34 +35,34 @@ int main(void) {
     pinMode(DIR2, OUTPUT);
     analogWrite(SPEEDPIN,255);
 
-    open();
-    for(;;){
+    // open();
+    // for(;;){
 
-    }
+    // }
 
     
 
-    // while(1) {
-    //     digitalWrite(LED_PIN, HIGH);  // Turn LED on
-    //     delay(500);  // Wait 500ms
-    //     digitalWrite(LED_PIN, LOW);  // Turn LED off
-    //     delay(500);  // Wait 500ms
-    // }
+    while(1) {
+        digitalWrite(DIR1, HIGH);  // Turn LED on
+        delay(500);  // Wait 500ms
+        digitalWrite(DIR1, LOW);  // Turn LED off
+        delay(500);  // Wait 500ms
+    }
 
 
-    long int openSeconds = openTime*60*60;
-    long int closingSeconds = closingTime*60*60;
+    // long int openSeconds = openTime*60*60;
+    // long int closingSeconds = closingTime*60*60;
 
-    // for(;;){
+    // // for(;;){
 
-        if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
-    //         open();
-            ;
-        }else{
-    //         close();
-            ;
-         }
-    //}
+    //     if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
+    // //         open();
+    //         ;
+    //     }else{
+    // //         close();
+    //         ;
+    //      }
+    // //}
 
 
     return 0;
