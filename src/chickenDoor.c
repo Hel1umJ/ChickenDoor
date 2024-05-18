@@ -2,13 +2,12 @@
 #include <wiringPi.h>
 #include <time.h>
 
-
 /*
 *Config variables.
 */
 #define DLST 1 //Daylight savings time; manually update this when needed.
-float openTime = 6;//Decimal number from [0,24], decimal for partial hours
-float closingTime = 20; //Decima number from [0,24], decimal for partial hours
+const float openTime = 6;//Decimal number from [0,24], decimal for partial hours
+const float closingTime = 20; //Decima number from [0,24], decimal for partial hours
 
 /*
 *Pinout declarations
@@ -35,32 +34,31 @@ int main(void) {
     pinMode(SPEEDPIN, OUTPUT);  // Set pin as output
     pinMode(DIR1, OUTPUT);
     pinMode(DIR2, OUTPUT);
-    digitalWrite(SPEEDPIN,HIGH); //Cant be analog write; no analog write.
+    digitalWrite(SPEEDPIN,HIGH); //no analog write; digital write HIGH to set motor speed to max.
     resetDirectionPins();//Stupid bug, you have to initialize direction pin values to low.
-
-    
-    // for(;;){
-    //     closeDoor();
-    // }
-    // resetDirectionPins();
-    
-
 
     long int openSeconds = openTime*60*60;
     long int closingSeconds = closingTime*60*60;
 
     //Infinite control loop
+    
     for(;;){
+        long int doorActivationTime = 3*60;
         //TODO: put this if statement in a timer that makes sure door is open/closed (make it like 5 mins long)
-        if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
-            openDoor();
-            
+        if((daySeconds() >= openSeconds) && (daySeconds() <= closingSeconds)){
+            time_t startTime = time(NULL);
+            while((time(NULL) - startTime) < doorActivationTime){
+                openDoor();
+            }
         }else{
-            closeDoor();
+            time_t startTime = time(NULL);
+            while((time(NULL) - startTime) < doorActivationTime){
+                closeDoor();
+            }
             
          }
 
-         resetDirectionPins();
+        resetDirectionPins();
     }
 
     return 0;
@@ -102,14 +100,7 @@ void closeDoor(){
 void resetDirectionPins(){
     digitalWrite(DIR1, LOW);
     digitalWrite(DIR2, LOW);
-
 }
-
-
-// 1.  If currentTime > openTime && currentTime < CloseTime:
-//         Open Door
-//     Else:
-//         close door
 
 
     
@@ -117,26 +108,7 @@ void resetDirectionPins(){
 
 
 
-// #include <wiringPi.h>
-// #include <stdio.h>
 
-// // Pin number declaration (WiringPi scheme)
-// #define LED_PIN 0  // GPIO 17 in WiringPi is pin 0
-
-// int main(void) {
-//     // Setup stuff:
-//     wiringPiSetup();  // Initialize wiringPi
-//     pinMode(LED_PIN, OUTPUT);  // Set pin as output
-
-//     while(1) {
-//         digitalWrite(LED_PIN, HIGH);  // Turn LED on
-//         delay(500);  // Wait 500ms
-//         digitalWrite(LED_PIN, LOW);  // Turn LED off
-//         delay(500);  // Wait 500ms
-//     }
-
-//     return 0;
-// }
 
 
 //TODO: I found the fuking bug. setup calls a function called open(), 
