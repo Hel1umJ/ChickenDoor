@@ -13,9 +13,9 @@ float closingTime = 20; //Decima number from [0,24], decimal for partial hours
 /*
 *Pinout declarations
 */
-#define SPEEDPIN 7
-#define DIR1 0  // GPIO 17 in WiringPi is pin 0; 
-#define DIR2 2
+#define SPEEDPIN 7 //ENA on L298N
+#define DIR1 0  // GPIO 17 in WiringPi is pin 0; IN1 on L298N
+#define DIR2 2 //IN2 on L298N
 
 /*
 *Prototypes
@@ -35,46 +35,35 @@ int main(void) {
     pinMode(SPEEDPIN, OUTPUT);  // Set pin as output
     pinMode(DIR1, OUTPUT);
     pinMode(DIR2, OUTPUT);
-    analogWrite(SPEEDPIN,255);
+    digitalWrite(SPEEDPIN,HIGH); //Cant be analog write; no analog write.
     resetDirectionPins();//Stupid bug, you have to initialize direction pin values to low.
 
     
-    for(;;){
-        closeDoor();
-    }
-    resetDirectionPins();
+    // for(;;){
+    //     closeDoor();
+    // }
+    // resetDirectionPins();
     
 
 
-    // long int openSeconds = openTime*60*60;
-    // long int closingSeconds = closingTime*60*60;
+    long int openSeconds = openTime*60*60;
+    long int closingSeconds = closingTime*60*60;
 
-    // // for(;;){
+    //Infinite control loop
+    for(;;){
+        //TODO: put this if statement in a timer that makes sure door is open/closed (make it like 5 mins long)
+        if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
+            openDoor();
+            
+        }else{
+            closeDoor();
+            
+         }
 
-    //     if(daySeconds() >= openSeconds && daySeconds() <= closingSeconds){
-    // //         open();
-    //         ;
-    //     }else{
-    // //         close();
-    //         ;
-    //      }
-    // //}
+         resetDirectionPins();
+    }
 
     return 0;
-    
-   //Blink
-    // wiringPiSetup();  // Initialize wiringPi
-    // pinMode(DIR1, OUTPUT);  // Set pin as output
-
-    // while(1) {
-    //     digitalWrite(DIR1, HIGH);  // Turn LED on
-    //     delay(500);  // Wait 500ms
-    //     digitalWrite(DIR1, LOW);  // Turn LED off
-    //     delay(500);  // Wait 500ms
-    // }
-
-    // return 0;
-
 }
 
 
