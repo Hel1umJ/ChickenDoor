@@ -7,7 +7,7 @@
 */
 #define DLST 1 //Daylight savings time; manually update this when needed.
 const float openTime = 6;//Decimal number from [0,24], decimal for partial hours
-const float closingTime = 20; //Decima number from [0,24], decimal for partial hours
+const float closingTime = 21; //Decima number from [0,24], decimal for partial hours
 
 /*
 *Pinout declarations
@@ -55,14 +55,14 @@ int main(void) {
             time_t startTime = time(NULL);
             //while((time(NULL) - startTime) < doorActivationTime){
                 openDoor();
-		printf("Door opening");
+		printf("Door opening\n");
 		delay10();
             //}
         }else{
             time_t startTime = time(NULL);
             //while((time(NULL) - startTime) < doorActivationTime){
                 closeDoor();
-		printf("Door closing");
+		printf("Door closing\n");
 		delay10();
             //}
             
@@ -118,7 +118,7 @@ void delay10(){
 	while((time(NULL) - secondsNow)<10 ){
 		;
 	}
-	printf("Delayed 10 seconds");
+	printf("Delayed 10 seconds\n");
 	return;
 }
     
