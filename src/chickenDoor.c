@@ -47,14 +47,16 @@ int main(void) {
         //TODO: put this if statement in a timer that makes sure door is open/closed (make it like 5 mins long)
         if((daySeconds() >= openSeconds) && (daySeconds() <= closingSeconds)){
             time_t startTime = time(NULL);
-            while((time(NULL) - startTime) < doorActivationTime){
-                openDoor();
-            }
+            //while((time(NULL) - startTime) < doorActivationTime){
+            openDoor();
+            printf("Door Opening");
+            //}
         }else{
             time_t startTime = time(NULL);
-            while((time(NULL) - startTime) < doorActivationTime){
-                closeDoor();
-            }
+            //while((time(NULL) - startTime) < doorActivationTime){
+            closeDoor();
+            printf("Door Closing");
+            //}
             
          }
 
