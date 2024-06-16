@@ -27,6 +27,8 @@ void openDoor();
 void closeDoor();
 //resets any voltages on direction pins for motor controller.
 void resetDirectionPins();
+//Delays10ms
+void delay10();
 
 int main(void) {
     // Initialize WiringPi and pin modes + outputs
@@ -43,22 +45,31 @@ int main(void) {
     //Infinite control loop
     
     for(;;){
-        long int doorActivationTime = 3*60;
+        long int doorActivationTime = 30;
+	long int seconds = daySeconds();
+	float hours = ((float)seconds)/(60*60);
+	printf("Hours: %9.6f\n", hours);
+
         //TODO: put this if statement in a timer that makes sure door is open/closed (make it like 5 mins long)
         if((daySeconds() >= openSeconds) && (daySeconds() <= closingSeconds)){
             time_t startTime = time(NULL);
-            while((time(NULL) - startTime) < doorActivationTime){
+            //while((time(NULL) - startTime) < doorActivationTime){
                 openDoor();
-            }
+		printf("Door opening");
+		delay10();
+            //}
         }else{
             time_t startTime = time(NULL);
-            while((time(NULL) - startTime) < doorActivationTime){
+            //while((time(NULL) - startTime) < doorActivationTime){
                 closeDoor();
-            }
+		printf("Door closing");
+		delay10();
+            //}
             
          }
-
+				
         resetDirectionPins();
+	delay(10);
     }
 
     return 0;
@@ -102,7 +113,14 @@ void resetDirectionPins(){
     digitalWrite(DIR2, LOW);
 }
 
-
+void delay10(){
+	long int secondsNow = time(NULL);
+	while((time(NULL) - secondsNow)<10 ){
+		;
+	}
+	printf("Delayed 10 seconds");
+	return;
+}
     
 
 
