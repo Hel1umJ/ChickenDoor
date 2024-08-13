@@ -1,5 +1,11 @@
 -Dependencies: wiringPi
 
+-Hardware: 
+    -Rasperry PI 3B & disply
+    -12" 12V linear actuator
+    -L892N motor controller 
+    -
+
 -Install Dependencies on raspberry pi so the .so files are available for use by your executable.
 
 
